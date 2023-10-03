@@ -11,5 +11,7 @@ app.use(express.urlencoded())
 app.use(logger)
 
 router.get('/api/products', productControllers.showAll)
+router.get('/api/products/:id', productControllers.showById)
+router.post('/api/products', productControllers.create)
 
 module.exports = router
