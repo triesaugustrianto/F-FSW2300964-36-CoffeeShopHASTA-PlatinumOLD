@@ -9,7 +9,7 @@ const logger = (req, res, next) => {
 };
 
 //midleware
-
+console.log(logger);
 app.use(logger);
 app.use(express.json());
 app.use(express.urlencoded(false));
