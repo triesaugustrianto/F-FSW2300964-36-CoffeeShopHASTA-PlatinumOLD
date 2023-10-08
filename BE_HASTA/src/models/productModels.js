@@ -1,33 +1,50 @@
-const db = require('../db/db')
+const db = require("../db/db");
 
 module.exports = {
-    showAll : () => {
-        return db.select('*').from('products')
-    },
-
-    showById : (id) => {
-        return db.select('*').from('products').where('id', id).first()
-    },
-
-    create : (
-            name, 
-            price, 
-            stock, 
-            category, 
-            image, 
-            statusStock, 
-            statusProduct, 
-            description
-        ) => {
-        return db('products').insert({
-            name            : name,
-            price           : price,
-            stock           : stock,
-            category        : category,
-            image           : image,
-            statusStock     : statusStock,
-            statusProduct   : statusProduct,
-            description     : description
-        })
-    }
-}
+  //get all
+  showAll: () => {
+    return db.select("*").from("products").where("statusProduct", true);
+  },
+  // detail
+  showById: (id) => {
+    return db.select("*").from("products").where("id", id).first();
+  },
+  //create data
+  create: (name, price, stock, category, image, description) => {
+    return db("products").insert({
+      name: name,
+      price: price,
+      stock: stock,
+      category: category,
+      image: image,
+      description: description,
+    });
+  },
+  //update data
+  update: (id, name, price, stock, category, image, description) => {
+    return db("products")
+      .where("id", id)
+      .update({
+        name: name,
+        price: price,
+        stock: stock,
+        category: category,
+        image: image,
+        description: description,
+      })
+      .returning([
+        "name",
+        "price",
+        "stock",
+        "category",
+        "image",
+        "description",
+      ]);
+  },
+  //delete
+  delete: (id) => {
+    return db("products").where("id", id).update({
+      statusProduct: false,
+    });
+  },
+};

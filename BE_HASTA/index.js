@@ -1,34 +1,38 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
-const port = 3000;
-const db = require("./src/db/db");
+//? ===  MODUL ====
+const port = 2000;
 const router = require("./src/routers/routerProducts");
+const routeUser = require("./src/routers/routeUser");
 
+//midleware
 const logger = (req, res, next) => {
   next();
 };
-
-//midleware
 console.log(logger);
 app.use(logger);
 app.use(express.json());
 app.use(express.urlencoded(false));
-//app.use('/api/products', router)
+app.use(cors());
+// app.use(morgan("tiny"))
+
+//ROUTING
 app.use(router);
+app.use(routeUser);
 
 //error handling
-
 app.use("/", (req, res, next) => {
   res.status(404).json({
     status: 404,
     message: "not found",
   });
 });
-
+//! ===
 app.use("/error", (req, res) => {
   error;
 });
-
+//! ===
 app.use((err, req, res, next) => {
   console.log("server error");
   res.status(500).json({
