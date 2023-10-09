@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 
 const NavBar = () => {
-  const history = useHistory();
-
   const handleLogin = () => {
-    history.push("/login");
+    window.location.href = "/login";
   };
 
   const handleSignUp = () => {
-    history.push("/signup");
+    window.location.href = "/signup";
   };
 
   return (
