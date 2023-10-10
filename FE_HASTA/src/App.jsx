@@ -1,17 +1,21 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Menu from "./pages/Menu";
-import About from "./pages/About";
-import Stores from "./pages/Stores";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import NotFound from "./pages/NotFound";
-
 import "./App.css";
+import {
+  About,
+  Home,
+  Login,
+  Menu,
+  NotFound,
+  SignUp,
+  Stores,
+} from "./pages/landing";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
+      {/* ROUTES LANDING PAGE */}
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/menu" element={<Menu />}></Route>
@@ -21,7 +25,7 @@ function App() {
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
