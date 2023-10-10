@@ -8,7 +8,7 @@ module.exports = {
       const data = await productModels.showAll();
       res.status(200).json({
         status: 200,
-        data: data,
+        query: data,
       });
     } catch (error) {
       res.status(500).json({
