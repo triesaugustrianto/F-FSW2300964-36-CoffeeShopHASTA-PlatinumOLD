@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const morgan = require("morgan");
 //? ===  MODUL ====
 const port = 2000;
 const router = require("./src/routers/routerProducts");
@@ -15,7 +16,7 @@ app.use(logger);
 app.use(express.json());
 app.use(express.urlencoded(false));
 app.use(cors());
-// app.use(morgan("tiny"))
+app.use(morgan("tiny"));
 
 //ROUTING
 app.use(router);
