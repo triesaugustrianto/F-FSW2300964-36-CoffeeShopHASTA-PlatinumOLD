@@ -156,11 +156,11 @@ nav .login button:active {
 
 /* Sidebar */
 
-.container {
+/* .container {
   display: flex;
   min-height: 100vh;
   margin: 0 178px;
-}
+} */
 .main-content {
   background-color: #eeeeee;
   flex-grow: 1;
@@ -376,9 +376,4 @@ nav .login button:active {
   height: 24px;
   color: #d9d9d9;
   background-color: transparent;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
