@@ -46,7 +46,7 @@ html {
 
 /* Navbar */
 
-nav {
+Navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -156,21 +156,14 @@ nav .login button:active {
 
 /* Sidebar */
 
-.container {
-  display: flex;
-  min-height: 100vh;
-  margin: 0 178px;
-}
-.main-content {
-  background-color: #eeeeee;
-  flex-grow: 1;
-}
 .sidebar-content {
   width: 185px;
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
-  font-family: sans-serif;
+  font-family: "Montserrat";
+  min-height: 100vh;
+  margin: 0 178px;
 }
 .sidebar-content a {
   text-decoration: none;

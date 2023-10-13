@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { GlobalContext } from "./context/GlobalContext.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalContext>
