@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const port = 2000;
 const router = require("./src/routers/routerProducts");
 const routeUser = require("./src/routers/routeUser");
+const routeProduct = require("./src/routers/routeProduct");
 
 //midleware
 const logger = (req, res, next) => {
@@ -21,6 +22,7 @@ app.use(morgan("tiny"));
 //ROUTING
 app.use(router);
 app.use(routeUser);
+app.use(routeProduct);
 
 //error handling
 app.use("/", (req, res, next) => {
