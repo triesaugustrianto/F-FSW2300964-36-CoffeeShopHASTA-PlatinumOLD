@@ -1,9 +1,9 @@
 import addtocart from "../assets/icon/Add shopping cart.svg";
-import menu1 from "../assets/image/coffe1.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const Catalog = ({ name, desc, price, add, like, img }) => {
+  
   return (
     <div className="products">
       <div className="box">
@@ -38,7 +38,11 @@ const Catalog = ({ name, desc, price, add, like, img }) => {
           </div>
         </div>
       </div>
+
+      
     </div>
+
+    
   );
 };
 

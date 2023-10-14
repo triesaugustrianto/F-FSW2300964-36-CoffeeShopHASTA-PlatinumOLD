@@ -1,5 +1,3 @@
-// import { Container, Nav } from "react-bootstrap";
-
 const SideBar = () => {
   return (
     <div className="sidebar-content">
