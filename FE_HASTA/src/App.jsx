@@ -16,6 +16,7 @@ import {
   Checkout,
   Daftar,
   HomeUser,
+  Order,
   Pesanan,
   PesananUser,
   Users,
@@ -51,6 +52,7 @@ function App() {
           <Route path="/user" element={<Users />}>
             <Route path="" element={<HomeUser />} />
             <Route path="menu" element={<Daftar />} />
+            <Route path="menu/co/:id" element={<Order />} />
             <Route path="order" element={<PesananUser />}>
               <Route path="" element={<Checkout />} />
               <Route path="pesanan" element={<Pesanan />} />

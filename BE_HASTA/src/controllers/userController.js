@@ -173,7 +173,7 @@ const updatePassword = async (req = request, res = response) => {
 const getDetailUser = async (req = request, res = response) => {
   try {
     const { id } = await req.params;
-    const getData = await db("users").select("*").where("id", id);
+    const getData = await db("users").select("*").where("id", id).first();
     res.status(200).json({
       status: true,
       message: "data is displayed successfully",
@@ -197,6 +197,38 @@ const getAllUsers = async (req = request, res = response) => {
       status: true,
       message: "data is displayed successfully",
       query: getData,
+    });
+  } catch (error) {
+    res.status(500).json({
+      succes: false,
+      error: error.message,
+    });
+  }
+};
+//update profil
+const updateProfil = async (req = request, res = response) => {
+  try {
+    const { id } = await req.params;
+    const { name, phone, email, address, password } = await req.body;
+    //hash password
+    const hashPassword = await argon2.hash(password);
+    //find user
+    const findUser = await db("users").select("*").where("id", id).first();
+    //updatedata
+    const updateData = await db("users")
+      .select("*")
+      .where("id", id)
+      .update({
+        name: name,
+        phone: phone,
+        email: email,
+        address: address,
+        password: !password ? findUser.password : hashPassword,
+      });
+    res.status(201).json({
+      status: true,
+      message: "success updated",
+      query: updateData,
     });
   } catch (error) {
     res.status(500).json({
@@ -239,5 +271,6 @@ module.exports = {
   updatePassword,
   getDetailUser,
   getAllUsers,
+  updateProfil,
   testingQuery,
 };

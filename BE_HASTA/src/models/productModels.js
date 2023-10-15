@@ -7,7 +7,7 @@ module.exports = {
   },
   // detail
   showById: (id) => {
-    return db.select("*").from("products").where("id", id).first();
+    return db.select("*").from("products").where("id", id);
   },
   //create data
   create: (name, price, stock, category, image, description) => {

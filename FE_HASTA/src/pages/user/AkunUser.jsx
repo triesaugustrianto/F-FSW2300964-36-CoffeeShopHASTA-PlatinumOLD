@@ -1,19 +1,56 @@
-import React from "react";
-import {
-  ArrowUpRight,
-  BoxArrowInRight,
-  EnvelopeAt,
-  Map,
-  Person,
-  ShieldLock,
-  Telephone,
-} from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { coffe } from "../../assets";
+import useSWR from "swr";
+import { fetcher } from "../../fetch";
+import { Errors, Loading, Modals, ProfilUpdate } from "../../components";
+import { useForm } from "react-hook-form";
+import { Eye, EyeSlash, ExclamationCircle } from "react-bootstrap-icons";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
+//modul
 export const AkunUser = () => {
+  const [show, setShow] = useState(false);
+  const { register, handleSubmit } = useForm();
+
+  //fetch data
+  const { data, isLoading, error } = useSWR(
+    `http://localhost:2000/api/user/ffbf266b-2193-4426-9e10-c883c995ea49`,
+    fetcher
+  );
+  if (isLoading) return <Loading />;
+  if (error) return <Errors />;
+
+  //updateData
+  const updateProfil = (data) => {
+    axios
+      .put(
+        `http://localhost:2000/api/users/update/ffbf266b-2193-4426-9e10-c883c995ea49`,
+        data
+      )
+      .then((res) => {
+        if (res.status === 201) {
+          toast.success("Success Update Account !", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 1500,
+          });
+          setTimeout(() => {
+            window.location.href = "/user/akun";
+          }, 2000);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 500) {
+          toast.error("Error Notification !", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        console.log(err);
+      });
+  };
   return (
     <div className="row ">
+      <ToastContainer />
       <div className="container position-relative">
         <div className="h-50 ">
           <img
@@ -27,7 +64,9 @@ export const AkunUser = () => {
           style={{ width: "18rem", bottom: "-25px" }}
         >
           <div className="card-body text-success d-flex justify-content-between align-items-center rounded-3">
-            <h5 className="card-title">Hi, hidayat</h5>
+            <h5 className="card-title">
+              Hi, <span className="fs-6">{data.name}</span>
+            </h5>
             <img
               src={coffe}
               alt="coffe"
@@ -38,68 +77,136 @@ export const AkunUser = () => {
         </div>
       </div>
       <div className="mt-5 col mx-2">
-        <div className="card">
-          <ul className="list-group list-group-flush">
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-              <Link className="nav-link d-flex align-items-center" to={"/"}>
-                <Person className="text-success" />
-                <span className="medium d-block text-black fw-medium ms-2">
-                  Nama
-                </span>
-              </Link>
-              <ArrowUpRight className="text-danger-emphasis" />
-            </li>
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-              <Link className="nav-link d-flex align-items-center" to={"/"}>
-                <EnvelopeAt className="text-success" />
-                <span className="medium d-block text-black fw-medium ms-2">
-                  Email
-                </span>
-              </Link>
+        <ProfilUpdate
+          name={data.name}
+          phone={data.phone}
+          email={data.email}
+          addres={data.address}
+        />
+        <div className="container">
+          <Modals
+            id={"name"}
+            title={"update name"}
+            content={
+              <form onSubmit={handleSubmit(updateProfil)}>
+                <div className="mb-3">
+                  <label htmlFor="name" className="form-label">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    defaultValue={data.name}
+                    {...register("name")}
+                  />
+                </div>
 
-              <ArrowUpRight className="text-danger-emphasis" />
-            </li>
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-              <Link className="nav-link d-flex align-items-center" to={"/"}>
-                <Telephone className="text-success" />
-                <span className="medium d-block text-black fw-medium ms-2">
-                  Phone
-                </span>
-              </Link>
-
-              <ArrowUpRight className="text-danger-emphasis" />
-            </li>
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-              <Link className="nav-link d-flex align-items-center" to={"/"}>
-                <Map className="text-success" />
-                <span className="medium d-block text-black fw-medium ms-2">
-                  Address
-                </span>
-              </Link>
-
-              <ArrowUpRight className="text-danger-emphasis" />
-            </li>
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-              <Link className="nav-link d-flex align-items-center" to={"/"}>
-                <ShieldLock className="text-success" />
-                <span className="medium d-block text-black fw-medium ms-2">
-                  Password
-                </span>
-              </Link>
-
-              <ArrowUpRight className="text-danger-emphasis" />
-            </li>
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-              <Link className="nav-link d-flex align-items-center" to={"/"}>
-                <ShieldLock className="text-success" />
-                <span className="medium d-block text-black fw-medium ms-2">
-                  Sign out
-                </span>
-              </Link>
-
-              <BoxArrowInRight className="text-danger  pe-auto" />
-            </li>
-          </ul>
+                <button type="submit" className="btn btn-success w-100">
+                  Submit
+                </button>
+              </form>
+            }
+          />
+          <Modals
+            id={"email"}
+            title={"update email"}
+            content={
+              <form onSubmit={handleSubmit(updateProfil)}>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    defaultValue={data.email}
+                    {...register("email")}
+                  />
+                </div>
+                <button type="submit" className="btn btn-success w-100">
+                  Submit
+                </button>
+              </form>
+            }
+          />
+          <Modals
+            id={"phone"}
+            title={"update phone"}
+            content={
+              <form onSubmit={handleSubmit(updateProfil)}>
+                <div className="mb-3">
+                  <label htmlFor="phone" className="form-label">
+                    phone
+                  </label>
+                  <input
+                    type="phone"
+                    className="form-control"
+                    id="phone"
+                    defaultValue={data.phone}
+                    {...register("phone")}
+                  />
+                </div>
+                <button type="submit" className="btn btn-success w-100">
+                  Submit
+                </button>
+              </form>
+            }
+          />
+          <Modals
+            id={"address"}
+            title={"update address"}
+            content={
+              <form onSubmit={handleSubmit(updateProfil)}>
+                <div className="mb-3">
+                  <label htmlFor="address" className="form-label">
+                    Address
+                  </label>
+                  <input
+                    type="address"
+                    className="form-control"
+                    id="address"
+                    defaultValue={data.address}
+                    {...register("address")}
+                  />
+                </div>
+                <button type="submit" className="btn btn-success w-100">
+                  Submit
+                </button>
+              </form>
+            }
+          />
+          <Modals
+            id={"password"}
+            title={"testing password"}
+            content={
+              <form onSubmit={handleSubmit(updateProfil)}>
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">
+                    Password
+                  </label>
+                  <div className="input-group flex-nowrap">
+                    <input
+                      type={show ? "text" : "password"}
+                      className="form-control"
+                      {...register("password")}
+                    />
+                    <button
+                      type="button"
+                      className="input-group-text "
+                      onClick={() => setShow(!show)}
+                    >
+                      {show ? <Eye /> : <EyeSlash />}
+                    </button>
+                  </div>
+                </div>
+                <button type="submit" className="btn btn-success w-100">
+                  Submit
+                </button>
+              </form>
+            }
+          />
         </div>
       </div>
     </div>

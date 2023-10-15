@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { CardProduct, Errors, Loading } from "../../components";
+import { CardProduct, Errors, Loading, Modals } from "../../components";
 import useSWR from "swr";
 import { fetcher } from "../../fetch";
 
@@ -8,11 +8,11 @@ import { fetcher } from "../../fetch";
 export const Daftar = () => {
   const [category, setCategory] = useState("all");
   const navigate = useNavigate();
-
   const { data, isLoading, error } = useSWR(
     `http://localhost:2000/api/product?categories=${category}`,
     fetcher
   );
+
   if (isLoading) return <Loading />;
   if (error) return <Errors />;
 
@@ -98,7 +98,7 @@ export const Daftar = () => {
                 title={e.name}
                 cat={e.category}
                 price={e.price}
-                click={() => navigate(`/user/${e.id}`)}
+                click={() => navigate(`/user/menu/co/${e.id}`)}
               />
             );
           })}

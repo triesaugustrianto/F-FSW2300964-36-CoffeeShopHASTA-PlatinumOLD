@@ -32,7 +32,7 @@ module.exports = {
       } else {
         res.status(200).json({
           status: 200,
-          data: data,
+          query: data,
         });
       }
     } catch (error) {

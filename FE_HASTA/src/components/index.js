@@ -8,6 +8,7 @@ import { MenuUser } from "./MenuUser";
 import { Modals } from "./Modals";
 import NavBar from "./NavBar";
 import { NotFound } from "./NotFound";
+import { ProfilUpdate } from "./ProfilUpdate";
 import SideBar from "./SideBar";
 import { Succes } from "./Succes";
 
@@ -24,4 +25,5 @@ export {
   Succes,
   CardProduct,
   Modals,
+  ProfilUpdate,
 };
