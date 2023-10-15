@@ -114,7 +114,7 @@ test('return res.json should show by id', async function() {
     expect(res.status).toBeCalledWith(200)
     expect(res.json).toBeCalledWith({
         status : 200,
-        data: data
+        query: data
     })
 })
 
