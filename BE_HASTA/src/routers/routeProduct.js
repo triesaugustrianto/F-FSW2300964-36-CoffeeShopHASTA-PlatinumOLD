@@ -1,9 +1,20 @@
 const express = require("express");
-const { getAllProduct } = require("../controllers/productController");
+const {
+  getAllProduct,
+  createProduct,
+  getDetailProduct,
+  editProduct,
+  nonAktipproduct,
+} = require("../controllers/productController");
+const uploadProduct = require("../middleware/productUpload");
 const routeProduct = express.Router();
-routeProduct.post("/");
+routeProduct.post("/api/product", uploadProduct.single("image"), createProduct);
 routeProduct.get("/api/product", getAllProduct);
-routeProduct.get("/:id");
-routeProduct.put("/:id");
-routeProduct.delete("/:id");
+routeProduct.get("/api/product/:id", getDetailProduct);
+routeProduct.put(
+  "/api/product/:id",
+  uploadProduct.single("image"),
+  editProduct
+);
+routeProduct.delete("/api/product/delete/:id", nonAktipproduct);
 module.exports = routeProduct;

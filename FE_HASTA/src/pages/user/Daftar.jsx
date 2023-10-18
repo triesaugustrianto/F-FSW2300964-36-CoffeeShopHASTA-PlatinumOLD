@@ -36,12 +36,12 @@ export const Daftar = () => {
           <li className="nav-item">
             <NavLink
               className={
-                category === "coffe"
+                category === "Coffe"
                   ? "nav-link text-success fw-bold"
                   : "nav-link "
               }
               aria-current="page"
-              onClick={() => setCategory("coffe")}
+              onClick={() => setCategory("Coffe")}
             >
               Coffe
             </NavLink>
@@ -49,12 +49,12 @@ export const Daftar = () => {
           <li className="nav-item">
             <NavLink
               className={
-                category === "tea"
+                category === "Tea"
                   ? "nav-link text-success fw-bold"
                   : "nav-link "
               }
               aria-current="page"
-              onClick={() => setCategory("tea")}
+              onClick={() => setCategory("Tea")}
             >
               Tea
             </NavLink>
@@ -62,12 +62,12 @@ export const Daftar = () => {
           <li className="nav-item">
             <NavLink
               className={
-                category === "bleand"
+                category === "Blended"
                   ? "nav-link text-success fw-bold"
                   : "nav-link "
               }
               aria-current="page"
-              onClick={() => setCategory("bleand")}
+              onClick={() => setCategory("Blended")}
             >
               Blend
             </NavLink>
@@ -75,12 +75,12 @@ export const Daftar = () => {
           <li className="nav-item">
             <NavLink
               className={
-                category === "other"
+                category === "Others"
                   ? "nav-link text-success fw-bold"
                   : "nav-link "
               }
               aria-current="page"
-              onClick={() => setCategory("other")}
+              onClick={() => setCategory("Others")}
             >
               Other
             </NavLink>

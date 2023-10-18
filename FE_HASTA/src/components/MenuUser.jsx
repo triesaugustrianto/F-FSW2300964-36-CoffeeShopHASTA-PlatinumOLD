@@ -10,7 +10,6 @@ import {
   PersonFill,
 } from "react-bootstrap-icons";
 import { NavLink } from "react-router-dom";
-import { Modals } from "./Modals";
 
 export const MenuUser = () => {
   const storedValueAsNumber = Number(localStorage.getItem("nav"));

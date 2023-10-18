@@ -22,9 +22,29 @@ import {
   Users,
 } from "./pages/user";
 import { useState } from "react";
+import { CreateProduct, Dashboard, EditProduct } from "./pages/admin";
+import { ProductDsb } from "./pages/admin/product/ProductDsb";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
+
+  const [isAdmin, setIsAdmin] = useState(false);
+  if (isAdmin) {
+    return (
+      <>
+        {/* ROUTES LANDING DASHBOARD */}
+
+        <Routes>
+          <Route path="/dsb" element={<Dashboard />}>
+            <Route path="product" element={<ProductDsb />} />
+            <Route path="product/edit/:id" element={<EditProduct />} />
+            <Route path="product/create" element={<CreateProduct />} />
+            edit
+          </Route>
+        </Routes>
+      </>
+    );
+  }
 
   if (isLogin) {
     return (
