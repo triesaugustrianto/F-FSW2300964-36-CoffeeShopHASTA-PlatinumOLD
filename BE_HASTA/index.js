@@ -2,23 +2,21 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const morgan = require("morgan");
+const swaggerJS = require('swagger-jsdoc')
+const swaggerUi = require('swagger-ui-express')
+const apidocs = require('./apidocs.json')
+
 //? ===  MODUL ====
 const port = 2000;
 const router = require("./src/routers/routerProducts");
 const routeUser = require("./src/routers/routeUser");
 const routeProduct = require("./src/routers/routeProduct");
 
-//midleware
-const logger = (req, res, next) => {
-  next();
-};
-console.log(logger);
-app.use(logger);
 app.use(express.json());
-app.use(express.urlencoded(false));
 app.use(cors());
 app.use(morgan("tiny"));
-
+app.use(express.urlencoded({ extended: false }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apidocs));
 //ROUTING
 app.use(router);
 app.use(routeUser);

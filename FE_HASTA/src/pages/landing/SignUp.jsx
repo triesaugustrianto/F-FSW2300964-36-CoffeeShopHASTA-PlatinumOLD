@@ -37,7 +37,6 @@ function SignUp() {
             position: toast.POSITION.TOP_CENTER,
           });
         }
-        console.error(err);
       });
   };
   return (

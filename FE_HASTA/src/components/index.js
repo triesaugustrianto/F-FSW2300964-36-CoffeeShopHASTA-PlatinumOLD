@@ -2,6 +2,7 @@ import { CardProduct } from "./CardProduct";
 import Catalog from "./Catalog";
 import { Errors } from "./Errors";
 import { Footer } from "./Footer";
+import { FormProduct } from "./FormProduct";
 import Header from "./Header";
 import { Loading } from "./Loading";
 import { MenuUser } from "./MenuUser";
@@ -26,4 +27,5 @@ export {
   CardProduct,
   Modals,
   ProfilUpdate,
+  FormProduct
 };

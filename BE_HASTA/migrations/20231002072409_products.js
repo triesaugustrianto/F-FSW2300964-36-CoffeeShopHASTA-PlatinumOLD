@@ -5,12 +5,10 @@
 exports.up = function (knex) {
   return knex.schema.createTable("products", (table) => {
     table.increments("id").primary();
-    table.string("name", 150).notNullable();
+    table.string("name", 225).notNullable();
     table.integer("price").notNullable();
-    table.integer("stock");
-    table.string("category", 150);
-    table.string("image", 255);
-    table.boolean("statusStock").defaultTo(true);
+    table.string("category").notNullable();
+    table.text("image");
     table.boolean("statusProduct").defaultTo(true);
     table.string("description");
     table.timestamp("createdAt").defaultTo(knex.fn.now());

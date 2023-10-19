@@ -1,0 +1,138 @@
+{
+    "openapi" : "3.1.0",
+    "info": {
+        "title" :"API HASTA Coffee Shop",
+        "description": "API Documentation",
+        "version": "1.0.0"
+    },
+    "server" : {
+        "url": "http://localhost:2000",
+        "description": "localhost"
+    },
+    "paths": {
+        "/api/products": {
+          "get": {
+            "tags": ["products"],
+            "summary": "Get all products in system",
+            "responses": {
+              "200": {
+                "description": "OK",
+                "schema": {
+                  "$ref": "#/definitions/products"
+                }
+              }
+            }
+          },
+          "post": {
+            "tags": ["products"],
+            "description": "Create new Products in system",
+            "parameters": [
+              {
+                "name": "products",
+                "in": "body",
+                "description": "products that we want to create",
+                "schema": {
+                  "$ref": "#/definitions/products"
+                }
+              }
+            ],
+            "produces": ["application/json"],
+            "responses": {
+              "200": {
+                "description": "New products is created",
+                "schema": {
+                  "$ref": "#/definitions/products"
+                }
+              }
+            }
+          }
+        },
+        "/api/products/{id}": {
+            "parameters": [
+              {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID of product that we want to find",
+                "type": "integer"
+              }
+            ],
+            "put": {
+              "summary": "Update product with give ID",
+              "tags": ["products"],
+              "parameters": [
+                {
+                  "name": "product",
+                  "in": "body",
+                  "description": "Product with new values of properties",
+                  "schema": {
+                    "$ref": "#/definitions/updateProducts"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Products is updated",
+                  "schema": {
+                    "$ref": "#/definitions/Products"
+                  }
+                }
+              }
+            }
+          }
+    },
+      "definitions": {
+        "products": {
+          "properties": {
+            "id": {
+                "type": "integer"
+            },
+              "name": {
+                  "type": "string"
+              },
+              "price": {
+                  "type": "integer"
+              },
+              "stock": {
+                  "type": "integer"
+              },
+              "category": {
+                  "type": "string"
+              },
+              "image": {
+                  "type": "string"
+              },
+              "description": {
+                  "type": "string"
+              }
+          }
+        },
+        "Users": {
+          "type": "array",
+          "$ref": "#/definitions/products"
+        },
+        "updateProducts": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "integer"
+                },
+                "stock": {
+                    "type": "integer"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            }
+          }
+    }
+}
+
