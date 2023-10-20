@@ -1,75 +1,44 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { DashSquare, PlusSquare, XSquareFill } from "react-bootstrap-icons";
+import { XSquareFill } from "react-bootstrap-icons";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+
+import { ToastContainer, toast } from "react-toastify";
+
+//modul
 export const Order = () => {
   const [data, setData] = useState([]);
   const [prices, setPrices] = useState(null);
-  const [qty, setQty] = useState(1);
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const { id } = useParams();
 
   //send
   const Submit = (data) => {
-    //tampung
-    let resCheck = JSON.parse(localStorage.getItem("checkout")) || [];
-    //check data/ update
-    const findData = resCheck.find((e) => e.IDP === data.ID);
-    if (!findData) {
-      //convert harga
-      const prc =
-        data.size === "large"
-          ? parseInt(data.price) + 6000
-          : parseInt(data.price);
-      //send data
-      const checkOut = {
-        Own: 1,
-        IDP: data.ID,
-        Img: data.img,
-        Product: data.name,
-        Size: data.size,
-        Ave: data.available,
-        Sweet: data.sweet,
-        Price: prc,
-        Qty: 1,
-      };
-      resCheck.push(checkOut);
-      //save local
-      localStorage.setItem("checkout", JSON.stringify(resCheck));
-    }
+    axios
+      .post(`http://localhost:2000/api/checkout`, data)
+      .then((res) => {
+        if (res.status === 201) {
+          toast.success("Success checkout !", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 1200,
+          });
+          setTimeout(() => {
+            window.location.href = "/user/order/";
+            localStorage.setItem("nav", "3");
+          }, 1800);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 500) {
+          toast.error("Error Notification !", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
 
-    //CHECK
-    resCheck.map((e) => {
-      if (e.Size === data.size) {
-        const prc =
-          data.size === "large"
-            ? parseInt(data.price) + 6000
-            : parseInt(data.price);
-        const checkOut = {
-          Own: 1,
-          IDP: data.ID,
-          Img: data.img,
-          Product: data.name,
-          Size: data.size,
-          Ave: data.available,
-          Sweet: data.sweet,
-          Price: prc,
-          Qty: 1,
-        };
-        resCheck.push(checkOut);
-        localStorage.setItem("checkout", JSON.stringify(resCheck));
-      } else {
-        element.Qty += 1;
-        localStorage.setItem("checkout", JSON.stringify(resCheck));
-      }
-    });
-
-    // setTimeout(() => {
-    //   window.location.href = "/user/order/";
-    //   localStorage.setItem("nav", "3");
-    // }, 800);
+        console.log(err);
+      });
   };
   useEffect(() => {
     axios
@@ -79,7 +48,13 @@ export const Order = () => {
         setData(response);
         setPrices(response.map((e) => parseInt(e.price)));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err.response.status === 500) {
+          toast.error("Error Notification !", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      });
   }, []);
 
   const handleSize = (e) => {
@@ -93,6 +68,7 @@ export const Order = () => {
 
   return (
     <div className="row">
+      <ToastContainer />
       <div className="col">
         {data &&
           data.map((e) => {
@@ -124,6 +100,12 @@ export const Order = () => {
                         />
                         <input
                           type="text"
+                          value={1}
+                          {...register("qty")}
+                          className="d-none"
+                        />
+                        <input
+                          type="text"
                           value={e.image}
                           {...register("img")}
                           className="d-none"
@@ -145,7 +127,7 @@ export const Order = () => {
                               className="form-control-plaintext fw-bold  w-50"
                               readOnly
                               value={prices}
-                              {...register("price")}
+                              {...register("price", { valueAsNumber: true })}
                             />
                           </div>
                         </div>
@@ -164,7 +146,7 @@ export const Order = () => {
                                 defaultChecked
                                 value={"reguler"}
                                 {...register("size")}
-                                onChange={handleSize}
+                                onClick={handleSize}
                               />
                               <label
                                 className="btn btn-outline-success"
@@ -305,6 +287,7 @@ export const Order = () => {
                         <button
                           type="submit"
                           className="btn btn-success w-100 my-4"
+                          onClick={() => setValue("price", prices)}
                         >
                           Checkout
                         </button>
