@@ -31,7 +31,7 @@ import { UserDsb } from "./pages/admin/User/user";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
   if (isAdmin) {
     return (
       <>
@@ -40,8 +40,8 @@ function App() {
         <Routes>
           <Route path="/dsb" element={<Navigation />}>
             <Route path="product" element={<ProductTable />} />
-            <Route path="order" element={<OrderTable/>} />
-            <Route path="user" element={<UserDsb/>} />
+            <Route path="order" element={<OrderTable />} />
+            <Route path="user" element={<UserDsb />} />
             <Route path="product/edit/:id" element={<EditProduct />} />
             <Route path="product/create" element={<CreateProduct />} />
             edit
@@ -83,7 +83,6 @@ function App() {
               <Route path="pesanan" element={<Pesanan />} />
             </Route>
             <Route path="akun" element={<AkunUser />} />
-            
           </Route>
         </Routes>
       </>
