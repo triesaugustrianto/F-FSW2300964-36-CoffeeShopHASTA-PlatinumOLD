@@ -31,47 +31,24 @@ import { UserDsb } from "./pages/admin/User/user";
 function App() {
   const [isLogin, setIsLogin] = useState(true);
 
-<<<<<<< HEAD
-  // const [isAdmin, setIsAdmin] = useState(true);
-  // if (isAdmin) {
-  //   return (
-  //     <>
-  //       {/* ROUTES LANDING DASHBOARD */}
-=======
   const [isAdmin, setIsAdmin] = useState(true);
   if (isAdmin) {
     return (
       <>
         {/* ROUTES LANDING DASHBOARD */}
->>>>>>> fa44a51859f2722821225c3d1ca70e7db2b7999a
 
-<<<<<<< HEAD
-  //       <Routes>
-  //         <Route path="/add-product" element={<AddProduct />}></Route>
-  //         <Route path="/" element={<Navigation />}>
-  //           <Route path="product" element={<ProductDsb />} />
-  //           <Route path="order" element={<OrderTable />}></Route>
-  //         </Route>
-  //         <Route path="/dsb" element={<Dashboard />}>
-  //           <Route path="product/edit/:id" element={<EditProduct />} />
-  //           <Route path="product/create" element={<CreateProduct />} />
-  //           edit
-  //         </Route>
-  //       </Routes>
-  //     </>
-  //   );
-  // }
-=======
+
+
         <Routes>
           <Route path="/dsb" element={<Navigation />}>
             <Route path="product" element={<ProductTable />} />
-<<<<<<< HEAD
+
             <Route path="order" element={<OrderTable/>} />
             <Route path="user" element={<UserDsb/>} />
-=======
+
             <Route path="order" element={<OrderTable />} />
             <Route path="user" element={<UserDsb />} />
->>>>>>> fa44a51859f2722821225c3d1ca70e7db2b7999a
+
             <Route path="product/edit/:id" element={<EditProduct />} />
             <Route path="product/create" element={<CreateProduct />} />
             edit
@@ -80,7 +57,6 @@ function App() {
       </>
     );
   }
->>>>>>> ea5b2a667a07c53c2ebaf5aedc5a08cf87663fe2
 
   if (!isLogin) {
     return (
