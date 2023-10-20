@@ -1,3 +1,4 @@
+// import { Container, Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
@@ -15,19 +16,18 @@ const NavBar = () => {
         <span>LOGO here</span>
       </Link>
       <div className="navbar">
-        <div className="bar-list">
-          <ul>
-            <li className="menu">
-              <Link to="/menu">Menu</Link>
-            </li>
-            <li className="stores">
-              <Link to="/stores">Stores</Link>
-            </li>
-            <li className="about">
-              <Link to="/about">About Us</Link>
-            </li>
-          </ul>
-        </div>
+        <ul>
+          <li className="menu">
+            <Link to="/menu">Menu</Link>
+          </li>
+          <li className="stores">
+            <Link to="/stores">Stores</Link>
+          </li>
+          <li className="about">
+            <Link to="/about">About Us</Link>
+          </li>
+        </ul>
+
         <span className="login">
           <button className="login-btn" onClick={handleLogin}>
             Log In
