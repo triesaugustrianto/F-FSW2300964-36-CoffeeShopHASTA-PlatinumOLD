@@ -11,6 +11,7 @@ const port = 2000;
 const router = require("./src/routers/routerProducts");
 const routeUser = require("./src/routers/routeUser");
 const routeProduct = require("./src/routers/routeProduct");
+const routeCheckout = require("./src/routers/checkout");
 
 app.use(express.json());
 app.use(cors());
@@ -21,7 +22,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apidocs));
 app.use(router);
 app.use(routeUser);
 app.use(routeProduct);
-
+app.use(routeCheckout);
 //error handling
 app.use("/", (req, res, next) => {
   res.status(404).json({

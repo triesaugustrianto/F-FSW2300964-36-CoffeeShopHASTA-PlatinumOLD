@@ -12,6 +12,7 @@ exports.up = function (knex) {
     table.string("size").notNullable();
     table.string("sweet").notNullable();
     table.string("availble").notNullable();
+    table.text("image");
     table.string("toping");
     table.string("owner");
     table.boolean("isPay").defaultTo(false);
