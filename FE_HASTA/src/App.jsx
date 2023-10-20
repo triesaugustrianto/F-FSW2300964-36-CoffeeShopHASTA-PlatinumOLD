@@ -24,6 +24,9 @@ import {
 import { useState } from "react";
 import { CreateProduct, Dashboard, EditProduct } from "./pages/admin";
 import { ProductDsb } from "./pages/admin/product/ProductDsb";
+import Navigation from "./components/navigation/navigation.component";
+import AddProduct from "./pages/admin/product/add-product.component";
+import OrderTable from "./components/order/order-table.component";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -36,7 +39,7 @@ function App() {
 
         <Routes>
           <Route path="/dsb" element={<Dashboard />}>
-            <Route path="product" element={<ProductDsb />} />
+            
             <Route path="product/edit/:id" element={<EditProduct />} />
             <Route path="product/create" element={<CreateProduct />} />
             edit
@@ -69,6 +72,13 @@ function App() {
     return (
       <>
         <Routes>
+        <Route path='/add-product' element={<AddProduct/>}>
+          </Route>
+          <Route path='/' element={<Navigation/>}>
+            <Route path="product" element={<ProductDsb />} />
+            <Route path="order" element={<OrderTable/>}></Route>
+          </Route>
+        
           <Route path="/user" element={<Users />}>
             <Route path="" element={<HomeUser />} />
             <Route path="menu" element={<Daftar />} />
@@ -78,6 +88,7 @@ function App() {
               <Route path="pesanan" element={<Pesanan />} />
             </Route>
             <Route path="akun" element={<AkunUser />} />
+            
           </Route>
         </Routes>
       </>
