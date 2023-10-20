@@ -29,27 +29,31 @@ import AddProduct from "./pages/admin/product/add-product.component";
 import OrderTable from "./components/order/order-table.component";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
-  const [isAdmin, setIsAdmin] = useState(false);
-  if (isAdmin) {
-    return (
-      <>
-        {/* ROUTES LANDING DASHBOARD */}
+  // const [isAdmin, setIsAdmin] = useState(true);
+  // if (isAdmin) {
+  //   return (
+  //     <>
+  //       {/* ROUTES LANDING DASHBOARD */}
 
-        <Routes>
-          <Route path="/dsb" element={<Dashboard />}>
-            
-            <Route path="product/edit/:id" element={<EditProduct />} />
-            <Route path="product/create" element={<CreateProduct />} />
-            edit
-          </Route>
-        </Routes>
-      </>
-    );
-  }
+  //       <Routes>
+  //         <Route path="/add-product" element={<AddProduct />}></Route>
+  //         <Route path="/" element={<Navigation />}>
+  //           <Route path="product" element={<ProductDsb />} />
+  //           <Route path="order" element={<OrderTable />}></Route>
+  //         </Route>
+  //         <Route path="/dsb" element={<Dashboard />}>
+  //           <Route path="product/edit/:id" element={<EditProduct />} />
+  //           <Route path="product/create" element={<CreateProduct />} />
+  //           edit
+  //         </Route>
+  //       </Routes>
+  //     </>
+  //   );
+  // }
 
-  if (isLogin) {
+  if (!isLogin) {
     return (
       <>
         {/* ROUTES LANDING PAGE */}
@@ -68,17 +72,10 @@ function App() {
     );
   }
 
-  if (!isLogin) {
+  if (isLogin) {
     return (
       <>
         <Routes>
-        <Route path='/add-product' element={<AddProduct/>}>
-          </Route>
-          <Route path='/' element={<Navigation/>}>
-            <Route path="product" element={<ProductDsb />} />
-            <Route path="order" element={<OrderTable/>}></Route>
-          </Route>
-        
           <Route path="/user" element={<Users />}>
             <Route path="" element={<HomeUser />} />
             <Route path="menu" element={<Daftar />} />
@@ -88,7 +85,6 @@ function App() {
               <Route path="pesanan" element={<Pesanan />} />
             </Route>
             <Route path="akun" element={<AkunUser />} />
-            
           </Route>
         </Routes>
       </>
