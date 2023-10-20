@@ -18,19 +18,73 @@ export default function Menu() {
             <SideBar />
           </div>
           <div className="catalog">
-            <div className="menu">
-              {product &&
-                product.map((e) => {
-                  return (
-                    <Catalog
-                      key={e.id}
-                      name={e.name}
-                      desc={e.description}
-                      price={e.price}
-                      img={e.image}
-                    />
-                  );
-                })}
+            <div className="menu-title" id="coffe">
+              <span>Coffe</span>
+              <div className="menu">
+                {product &&
+                  product.map((e) => {
+                    return (
+                      <Catalog
+                        key={e.id}
+                        name={e.name}
+                        desc={e.description}
+                        price={e.price}
+                        img={e.image}
+                      />
+                    );
+                  })}
+              </div>
+            </div>
+            <div className="menu-title" id="tea">
+              <span>Tea</span>
+              <div className="menu">
+                {product &&
+                  product.map((e) => {
+                    return (
+                      <Catalog
+                        key={e.id}
+                        name={e.name}
+                        desc={e.description}
+                        price={e.price}
+                        img={e.image}
+                      />
+                    );
+                  })}
+              </div>
+            </div>
+            <div className="menu-title" id="blended">
+              <span>Blended</span>
+              <div className="menu">
+                {product &&
+                  product.map((e) => {
+                    return (
+                      <Catalog
+                        key={e.id}
+                        name={e.name}
+                        desc={e.description}
+                        price={e.price}
+                        img={e.image}
+                      />
+                    );
+                  })}
+              </div>
+            </div>
+            <div className="menu-title" id="others">
+              <span>Others</span>
+              <div className="menu">
+                {product &&
+                  product.map((e) => {
+                    return (
+                      <Catalog
+                        key={e.id}
+                        name={e.name}
+                        desc={e.description}
+                        price={e.price}
+                        img={e.image}
+                      />
+                    );
+                  })}
+              </div>
             </div>
           </div>
         </div>
