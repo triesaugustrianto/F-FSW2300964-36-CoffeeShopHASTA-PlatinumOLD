@@ -8,6 +8,7 @@ exports.up = function (knex) {
     table.string("name");
     table.string("qty");
     table.string("keterangan");
+    table.timestamp("createdAt").defaultTo(knex.fn.now());
     table.integer("id_transaksi").unsigned().notNullable();
     table
       .foreign("id_transaksi")
