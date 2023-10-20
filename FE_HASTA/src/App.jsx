@@ -23,10 +23,10 @@ import {
 } from "./pages/user";
 import { useState } from "react";
 import { CreateProduct, Dashboard, EditProduct } from "./pages/admin";
-import { ProductDsb } from "./pages/admin/product/ProductDsb";
-import Navigation from "./components/navigation/navigation.component";
-import AddProduct from "./pages/admin/product/add-product.component";
-import OrderTable from "./components/order/order-table.component";
+import Navigation from "./pages/admin/navigation/navigation.component";
+import OrderTable from "./pages/admin/order/order-table.component";
+import ProductTable from "./pages/admin/product/product-table.component";
+import { UserDsb } from "./pages/admin/User/user";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -38,8 +38,10 @@ function App() {
         {/* ROUTES LANDING DASHBOARD */}
 
         <Routes>
-          <Route path="/dsb" element={<Dashboard />}>
-            
+          <Route path="/dsb" element={<Navigation />}>
+            <Route path="product" element={<ProductTable />} />
+            <Route path="order" element={<OrderTable/>} />
+            <Route path="user" element={<UserDsb/>} />
             <Route path="product/edit/:id" element={<EditProduct />} />
             <Route path="product/create" element={<CreateProduct />} />
             edit
@@ -72,13 +74,6 @@ function App() {
     return (
       <>
         <Routes>
-        <Route path='/add-product' element={<AddProduct/>}>
-          </Route>
-          <Route path='/' element={<Navigation/>}>
-            <Route path="product" element={<ProductDsb />} />
-            <Route path="order" element={<OrderTable/>}></Route>
-          </Route>
-        
           <Route path="/user" element={<Users />}>
             <Route path="" element={<HomeUser />} />
             <Route path="menu" element={<Daftar />} />
