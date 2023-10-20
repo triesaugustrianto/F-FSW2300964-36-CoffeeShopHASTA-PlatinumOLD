@@ -41,7 +41,6 @@ function App() {
 
         <Routes>
           <Route path="/dsb" element={<Dashboard />}>
-            
             <Route path="product/edit/:id" element={<EditProduct />} />
             <Route path="product/create" element={<CreateProduct />} />
             edit
@@ -74,13 +73,12 @@ function App() {
     return (
       <>
         <Routes>
-        <Route path='/add-product' element={<AddProduct/>}>
-          </Route>
-          <Route path='/' element={<Navigation/>}>
+          <Route path="/add-product" element={<AddProduct />}></Route>
+          <Route path="/" element={<Navigation />}>
             <Route path="product" element={<ProductDsb />} />
-            <Route path="order" element={<OrderTable/>}></Route>
+            <Route path="order" element={<OrderTable />}></Route>
           </Route>
-        
+
           <Route path="/user" element={<Users />}>
             <Route path="" element={<HomeUser />} />
             <Route path="menu" element={<Daftar />} />
@@ -90,7 +88,6 @@ function App() {
               <Route path="pesanan" element={<Pesanan />} />
             </Route>
             <Route path="akun" element={<AkunUser />} />
-            
           </Route>
         </Routes>
       </>
