@@ -5,7 +5,7 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 
 import { useNavigate } from 'react-router-dom'
 import ConfirmationModal from '../confirmation/confirmation.component'
-import useDeleteProduct from '../../hooks/product/useDeleteProduct'
+import useDeleteProduct from '../../../hooks/product/useDeleteProduct'
 
 
 

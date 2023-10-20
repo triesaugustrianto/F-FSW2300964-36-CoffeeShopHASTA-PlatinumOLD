@@ -1,4 +1,4 @@
-import {  CoffeeOutlined, DollarOutlined, LogoutOutlined } from '@ant-design/icons';
+import {  CoffeeOutlined, DollarOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import { Flex, Menu } from 'antd';
 import {  Outlet, useNavigate } from 'react-router-dom';
 import Icon from '@ant-design/icons/lib/components/Icon';
@@ -15,8 +15,9 @@ const HastaIcon = (props) => <Icon component={HastaSvg} {...props} />;
 
 const menuData = [
   { label: 'Hasta', icon: <HastaIcon/> },
-  { label: 'Product', key: 'sub1', icon: <CoffeeOutlined />, route: '/product' },
-  { label: 'Order', key: 'sub2', icon: <DollarOutlined />, route: '/order' },
+  { label: 'Product', key: 'sub1', icon: <CoffeeOutlined />, route: '/dsb/product' },
+  { label: 'User', key: 'sub4', icon: <UserOutlined />, route: '/dsb/user' },
+  { label: 'Order', key: 'sub2', icon: <DollarOutlined />, route: '/dsb/order' },
   { label: 'Logout', key: 'sub3', icon: <LogoutOutlined /> },
 ];
 

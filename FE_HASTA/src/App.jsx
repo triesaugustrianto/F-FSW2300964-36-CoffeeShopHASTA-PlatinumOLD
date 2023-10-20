@@ -23,10 +23,10 @@ import {
 } from "./pages/user";
 import { useState } from "react";
 import { CreateProduct, Dashboard, EditProduct } from "./pages/admin";
-import { ProductDsb } from "./pages/admin/product/ProductDsb";
-import Navigation from "./components/navigation/navigation.component";
-import AddProduct from "./pages/admin/product/add-product.component";
-import OrderTable from "./components/order/order-table.component";
+import Navigation from "./pages/admin/navigation/navigation.component";
+import OrderTable from "./pages/admin/order/order-table.component";
+import ProductTable from "./pages/admin/product/product-table.component";
+import { UserDsb } from "./pages/admin/User/user";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -37,6 +37,7 @@ function App() {
   //     <>
   //       {/* ROUTES LANDING DASHBOARD */}
 
+<<<<<<< HEAD
   //       <Routes>
   //         <Route path="/add-product" element={<AddProduct />}></Route>
   //         <Route path="/" element={<Navigation />}>
@@ -52,6 +53,21 @@ function App() {
   //     </>
   //   );
   // }
+=======
+        <Routes>
+          <Route path="/dsb" element={<Navigation />}>
+            <Route path="product" element={<ProductTable />} />
+            <Route path="order" element={<OrderTable/>} />
+            <Route path="user" element={<UserDsb/>} />
+            <Route path="product/edit/:id" element={<EditProduct />} />
+            <Route path="product/create" element={<CreateProduct />} />
+            edit
+          </Route>
+        </Routes>
+      </>
+    );
+  }
+>>>>>>> ea5b2a667a07c53c2ebaf5aedc5a08cf87663fe2
 
   if (!isLogin) {
     return (

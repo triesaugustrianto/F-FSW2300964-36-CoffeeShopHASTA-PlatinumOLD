@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextArea from 'antd/es/input/TextArea';
 import DropZone from '../upload/upload.component';
-import useAddProduct from '../../hooks/product/useAddProduct';
+import useAddProduct from '../../../hooks/product/useAddProduct';
 const { Title } = Typography
 const { Option } = Select;
 
