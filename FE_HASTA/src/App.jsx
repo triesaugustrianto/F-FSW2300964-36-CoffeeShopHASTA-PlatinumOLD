@@ -31,8 +31,8 @@ import RegisterAdmin from "./pages/landing/RegisterAdmin";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
-
   const [isAdmin, setIsAdmin] = useState(false);
+  
   if (isAdmin) {
     return (
       <>
