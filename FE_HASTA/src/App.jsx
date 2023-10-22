@@ -27,11 +27,12 @@ import Navigation from "./pages/admin/navigation/navigation.component";
 import OrderTable from "./pages/admin/order/order-table.component";
 import ProductTable from "./pages/admin/product/product-table.component";
 import { UserDsb } from "./pages/admin/User/user";
+import RegisterAdmin from "./pages/landing/RegisterAdmin";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   if (isAdmin) {
     return (
       <>
@@ -62,7 +63,9 @@ function App() {
           <Route path="/about" element={<About />}></Route>
           <Route path="/stores" element={<Stores />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/signup" element={<SignUp />}>
+            <Route path="admin" element={<RegisterAdmin />} />           
+          </Route>
           <Route path="/forgot" element={<ForgotPassword />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
