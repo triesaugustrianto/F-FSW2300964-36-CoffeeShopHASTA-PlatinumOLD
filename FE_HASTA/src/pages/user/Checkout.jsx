@@ -4,7 +4,7 @@ import { format } from "../../fetch/format";
 import axios from "axios";
 import { useForm, useFieldArray } from "react-hook-form";
 import { ExclamationCircle } from "react-bootstrap-icons";
-
+import { ToastContainer, toast } from "react-toastify";
 export const Checkout = () => {
   const handlePesan = () => {
     window.location.href = "/user/menu";
@@ -49,7 +49,27 @@ export const Checkout = () => {
   const totals = price.map((e) => e.sum);
   //submit pesanan
   const Submits = (data) => {
-    console.log(data);
+    axios
+      .post(`http://localhost:2000/api/transaksi`, data)
+      .then((res) => {
+        if (res.status === 201) {
+          toast.success("Payment Success !", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 1200,
+          });
+          setTimeout(() => {
+            window.location.href = "/user/order/pesanan";
+          }, 1500);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 500) {
+          toast.error("Error Notification !", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        console.log(err);
+      });
   };
 
   //change input tunai
@@ -63,6 +83,7 @@ export const Checkout = () => {
 
   return (
     <div className="container">
+      <ToastContainer />
       {data && data.length ? (
         <form action="" onSubmit={handleSubmit(Submits)}>
           <div className="container-fluid min-vh-100  position-relative">

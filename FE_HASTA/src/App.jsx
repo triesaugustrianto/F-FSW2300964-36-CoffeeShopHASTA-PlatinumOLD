@@ -38,11 +38,18 @@ function App() {
       <>
         {/* ROUTES LANDING DASHBOARD */}
 
+
+
         <Routes>
           <Route path="/dsb" element={<Navigation />}>
             <Route path="product" element={<ProductTable />} />
+
+            <Route path="order" element={<OrderTable/>} />
+            <Route path="user" element={<UserDsb/>} />
+
             <Route path="order" element={<OrderTable />} />
             <Route path="user" element={<UserDsb />} />
+
             <Route path="product/edit/:id" element={<EditProduct />} />
             <Route path="product/create" element={<CreateProduct />} />
             edit
@@ -52,7 +59,7 @@ function App() {
     );
   }
 
-  if (isLogin) {
+  if (!isLogin) {
     return (
       <>
         {/* ROUTES LANDING PAGE */}
@@ -73,7 +80,7 @@ function App() {
     );
   }
 
-  if (!isLogin) {
+  if (isLogin) {
     return (
       <>
         <Routes>

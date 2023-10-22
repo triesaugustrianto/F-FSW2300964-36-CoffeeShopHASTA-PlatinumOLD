@@ -122,8 +122,26 @@ const ProductTable = () => {
 
   return (
 
-    <Flex>
-        <Table columns={columns} dataSource={data} />
+    <Flex  style={{
+      flexDirection: 'column',
+      margin: 20,
+      gap: 20
+
+    }}>
+      <Flex style={{
+        justifyContent: 'flex-end',
+
+      }}>
+        <Button type='text' style={{
+          borderColor: 'black',
+          color: 'black'
+        
+        }}> + Add Product</Button>
+      </Flex>
+      <Flex>
+              <Table columns={columns} dataSource={data} />
+</Flex>
+
     </Flex>
   )
 }

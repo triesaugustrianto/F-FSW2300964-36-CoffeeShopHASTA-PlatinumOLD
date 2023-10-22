@@ -42,6 +42,7 @@ export const CreateProduct = () => {
             position: toast.POSITION.TOP_CENTER,
           });
         }
+        console.log(err);
       });
   };
   return (
