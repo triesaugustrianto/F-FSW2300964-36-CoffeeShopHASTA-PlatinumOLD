@@ -5,11 +5,12 @@ const { v4: uuidv4 } = require("uuid");
 const nodemailer = require("nodemailer");
 const smtpTransport = require("nodemailer-smtp-transport");
 const db = require("../db/db");
-
+const jwt = require("jsonwebtoken");
 //create users
 const createUsers = async (req = request, res = response) => {
   try {
-    const { name, phone, email, address, password } = await req.body;
+    const { name, phone, email, address, password, role } = await req.body;
+
     //hash password
     const hashPassword = await argon2.hash(password);
     //email transporter
@@ -30,8 +31,13 @@ const createUsers = async (req = request, res = response) => {
     //id user
     const id = uuidv4();
     //check email
-    const findData = await db("users").select("email").where("email", email);
-    if (findData.length) {
+    const findData = await db("users")
+      .select("email")
+      .where("email", email)
+      .first();
+
+    //check user
+    if (findData) {
       return res.status(400).json({
         success: false,
         message: "user already exist !!",
@@ -46,7 +52,7 @@ const createUsers = async (req = request, res = response) => {
           email: email,
           address: address,
           password: hashPassword,
-          role: "users",
+          role: role === false ? "user" : role,
         })
         .returning(["name", "phone", "email", "address"]);
       transporter.sendMail({
@@ -172,8 +178,8 @@ const updatePassword = async (req = request, res = response) => {
 //get detail user
 const getDetailUser = async (req = request, res = response) => {
   try {
-    const { id } = await req.params;
-    const getData = await db("users").select("*").where("id", id).first();
+    const { user_id } = await req.body;
+    const getData = await db("users").select("*").where("id", user_id).first();
     res.status(200).json({
       status: true,
       message: "data is displayed successfully",
@@ -238,24 +244,58 @@ const updateProfil = async (req = request, res = response) => {
   }
 };
 
-const testingQuery = async (req = request, res = response) => {
+//login
+const loginUser = async (req = request, res = response) => {
   try {
-    const { categories } = await req.query;
+    const { email, password } = await req.body;
 
-    //find category
-    const productCategory = await db("products").select("*");
-    const category = productCategory.map((e) => e.category);
-    const resultProduct = [...new Set(category)];
+    //find Data
+    const findUser = await db("users")
+      .select("*")
+      .where("email", email)
+      .first();
 
-    //find data
-    const resultData =
-      categories === "all"
-        ? await db("products").whereIn("category", resultProduct)
-        : await db("products").where("category", categories);
+    //check users
+    if (!findUser) {
+      return res.status(404).json({
+        message: "user not found !!",
+      });
+    }
+    //check aktip
+    const aktif = findUser.isConfirm;
 
-    res.status(200).json({
-      succes: true,
-      query: resultData,
+    if (!aktif) {
+      return res.status(403).json({
+        succes: false,
+        message: "user nof confirm",
+      });
+    }
+    //check password
+    const match = await argon2.verify(findUser.password, password);
+
+    if (!match) {
+      return res.status(400).json({
+        succes: false,
+        message: "password wrong",
+      });
+    }
+
+    // generate token
+    const token = await jwt.sign(
+      {
+        user_id: findUser.id,
+        user_name: findUser.name,
+        user_email: findUser.email,
+        Role: findUser.role,
+      },
+      process.env.SECRET,
+      { expiresIn: "1d" }
+    );
+    res.status(201).json({
+      status: true,
+      message: "login Berhasil",
+      token: token,
+      query: findUser,
     });
   } catch (error) {
     res.status(500).json({
@@ -264,6 +304,7 @@ const testingQuery = async (req = request, res = response) => {
     });
   }
 };
+
 module.exports = {
   createUsers,
   confirmUsers,
@@ -272,5 +313,5 @@ module.exports = {
   getDetailUser,
   getAllUsers,
   updateProfil,
-  testingQuery,
+  loginUser,
 };

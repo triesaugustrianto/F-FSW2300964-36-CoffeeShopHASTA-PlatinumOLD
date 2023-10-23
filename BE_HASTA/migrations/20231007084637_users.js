@@ -7,7 +7,7 @@ exports.up = function (knex) {
   return knex.schema.createTable("users", (table) => {
     table.string("id").primary();
     table.string("name").notNullable();
-    table.bigInteger("phone");
+    table.string("phone");
     table.string("email").unique().notNullable();
     table.string("address");
     table.string("password").notNullable();

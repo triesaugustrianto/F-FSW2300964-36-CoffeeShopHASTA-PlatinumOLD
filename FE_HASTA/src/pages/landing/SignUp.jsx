@@ -20,10 +20,11 @@ function SignUp() {
         if (res.status === 201) {
           toast.success("Success Notification !", {
             position: toast.POSITION.TOP_CENTER,
+            autoClose: 1200,
           });
           setTimeout(() => {
             window.location.href = "/login";
-          }, 1000);
+          }, 1500);
         }
       })
       .catch((err) => {
@@ -33,10 +34,11 @@ function SignUp() {
           });
         }
         if (err.response.status === 400) {
-          toast.warning("Warning Notification !", {
+          toast.warning(" email sudah terdaftar !", {
             position: toast.POSITION.TOP_CENTER,
           });
         }
+        console.log(err);
       });
   };
   return (
@@ -132,7 +134,7 @@ function SignUp() {
                   type="checkbox"
                   defaultValue="admin"
                   id="role"
-                  {...register("address", { required: true })}
+                  {...register("role", { required: true })}
                   defaultChecked="true"
                 />
                 <label className="form-check-label" htmlFor="flexCheckChecked">
