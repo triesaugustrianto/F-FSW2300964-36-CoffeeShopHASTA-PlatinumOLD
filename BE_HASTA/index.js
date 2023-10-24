@@ -5,9 +5,9 @@ const morgan = require("morgan");
 const swaggerJS = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const apidocs = require("./apidocs.json");
-
+require("dotenv").config();
 //? ===  MODUL ====
-const port = 2000;
+const port = process.env.PORT || 2000;
 const router = require("./src/routers/routerProducts");
 const routeUser = require("./src/routers/routeUser");
 const routeProduct = require("./src/routers/routeProduct");

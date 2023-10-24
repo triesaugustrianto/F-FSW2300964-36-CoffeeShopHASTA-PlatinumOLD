@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 //modul
-function SignUp() {
+function RegisterAdmin() {
   const [show, setShow] = useState(false);
   const {
     register,
@@ -20,11 +20,10 @@ function SignUp() {
         if (res.status === 201) {
           toast.success("Success Notification !", {
             position: toast.POSITION.TOP_CENTER,
-            autoClose: 1200,
           });
           setTimeout(() => {
             window.location.href = "/login";
-          }, 1500);
+          }, 1000);
         }
       })
       .catch((err) => {
@@ -34,17 +33,16 @@ function SignUp() {
           });
         }
         if (err.response.status === 400) {
-          toast.warning(" email sudah terdaftar !", {
+          toast.warning("Warning Notification !", {
             position: toast.POSITION.TOP_CENTER,
           });
         }
-        console.log(err);
       });
   };
   return (
     <div className="container-fluid mt-5">
       <ToastContainer />
-      <div className="container pt-5">
+      <div className="container">
         <div className="card px-5 py-4">
           <form className="row g-3" onSubmit={handleSubmit(Submit)}>
             <div className="col-12">
@@ -128,24 +126,6 @@ function SignUp() {
                   <ExclamationCircle /> field required
                 </div>
               )}
-              <div className="form-check mt-5">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  defaultValue="admin"
-                  id="role"
-                  {...register("role", { required: true })}
-                  defaultChecked="true"
-                />
-                <label className="form-check-label" htmlFor="flexCheckChecked">
-                  Admin
-                </label>
-              </div>
-              {errors.role && (
-                <div className="text-danger mt-2" style={{ fontSize: "14px" }}>
-                  <ExclamationCircle /> field required
-                </div>
-              )}
             </div>
             <div className="col-12 mt-5 ">
               <button type="submit" className="btn btn-primary w-100">
@@ -164,4 +144,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default RegisterAdmin;

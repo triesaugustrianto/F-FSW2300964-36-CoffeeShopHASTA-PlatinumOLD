@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { coffe } from "../../assets";
 import useSWR from "swr";
-import { fetcher } from "../../fetch";
+import { fetchToken, fetcher } from "../../fetch";
 import { Errors, Loading, Modals, ProfilUpdate } from "../../components";
 import { useForm } from "react-hook-form";
 import { Eye, EyeSlash, ExclamationCircle } from "react-bootstrap-icons";
@@ -15,8 +15,8 @@ export const AkunUser = () => {
 
   //fetch data
   const { data, isLoading, error } = useSWR(
-    `http://localhost:2000/api/user/ffbf266b-2193-4426-9e10-c883c995ea49`,
-    fetcher
+    `http://localhost:2000/api/user`,
+    fetchToken
   );
   if (isLoading) return <Loading />;
   if (error) return <Errors />;
@@ -179,7 +179,7 @@ export const AkunUser = () => {
           />
           <Modals
             id={"password"}
-            title={"testing password"}
+            title={"Update password"}
             content={
               <form onSubmit={handleSubmit(updateProfil)}>
                 <div className="mb-3">

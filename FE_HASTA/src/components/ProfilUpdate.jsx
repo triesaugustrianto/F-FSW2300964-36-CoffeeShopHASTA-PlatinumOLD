@@ -11,6 +11,11 @@ import {
 
 import { Link } from "react-router-dom";
 export const ProfilUpdate = ({ name, email, addres, phone }) => {
+  const handleLogout = () => {
+    sessionStorage.clear();
+    window.location.href = "/";
+    console.log("klik");
+  };
   return (
     <div className="card">
       <ul className="list-group list-group-flush">
@@ -70,7 +75,10 @@ export const ProfilUpdate = ({ name, email, addres, phone }) => {
             <ArrowUpRight className="text-danger-emphasis " />
           </a>
         </li>
-        <li className="list-group-item d-flex justify-content-between align-items-center">
+        <li
+          className="list-group-item d-flex justify-content-between align-items-center"
+          onClick={handleLogout}
+        >
           <Link className="nav-link d-flex align-items-center">
             <ShieldLock className="text-success" />
             <span className="medium d-block text-black fw-medium ms-2">

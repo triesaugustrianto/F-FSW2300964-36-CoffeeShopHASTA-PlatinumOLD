@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ExclamationCircle, Eye, EyeSlash } from "react-bootstrap-icons";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
 function Login() {
   const [show, setShow] = useState(false);
   const {
@@ -14,10 +14,60 @@ function Login() {
 
   //send data
   const Submit = (data) => {
-    axios.post(`url`).then().catch();
+    axios
+      .post(`http://localhost:2000/api/users-login`, data)
+      .then((res) => {
+        if (res.status === 201) {
+          sessionStorage.setItem("token", res.data.token);
+          sessionStorage.setItem(
+            "ROLE",
+            JSON.stringify(res.data.query["role"])
+          );
+
+          sessionStorage.setItem("nav", 1);
+
+          toast.success("Login Sukses !", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 1000,
+          });
+
+          if (JSON.parse(sessionStorage.getItem("ROLE")) === "user") {
+            return setTimeout(() => {
+              window.location.href = "/user";
+            }, 1800);
+          } else {
+            setTimeout(() => {
+              window.location.href = "/dsb";
+            }, 1800);
+          }
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 400) {
+          toast.warning(" password salah!", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        if (err.response.status === 404) {
+          toast.warning(" user  tidak terdaftar!", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        if (err.response.status === 403) {
+          toast.warning(" user belum konfirmasi akun!", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        if (err.response.status === 500) {
+          toast.error("Error Notification !", {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+      });
   };
   return (
     <div className="container-fluid m-5">
+      <ToastContainer />
       <div className="container">
         <div className="card px-5 py-5">
           <form onSubmit={handleSubmit(Submit)}>
