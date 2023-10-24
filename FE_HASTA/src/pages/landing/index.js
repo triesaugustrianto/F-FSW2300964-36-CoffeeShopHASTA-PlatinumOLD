@@ -5,6 +5,15 @@ import Login from "./Login";
 import Menu from "./Menu";
 import NotFound from "./NotFound";
 import SignUp from "./SignUp";
-import Stores from "./Stores";
+import { UpdatePassword } from "./UpdatePassword";
 
-export { About, Home, Login, Menu, NotFound, SignUp, Stores, ForgotPassword };
+export {
+  About,
+  Home,
+  Login,
+  Menu,
+  NotFound,
+  SignUp,
+  ForgotPassword,
+  UpdatePassword,
+};

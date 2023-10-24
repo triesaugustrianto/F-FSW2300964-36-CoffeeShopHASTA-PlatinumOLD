@@ -5,7 +5,6 @@ import { HomeUser } from "./HomeUser";
 import { Order } from "./Order";
 import { Pesanan } from "./Pesanan";
 import { PesananUser } from "./PesananUser";
-import { Transaksi } from "./Transaksi";
 import { Users } from "./Users";
 
 export {
@@ -16,6 +15,5 @@ export {
   Daftar,
   Checkout,
   Pesanan,
-  Transaksi,
   Order,
 };

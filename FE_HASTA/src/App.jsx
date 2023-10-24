@@ -8,9 +8,9 @@ import {
   Menu,
   NotFound,
   SignUp,
-  Stores,
+  UpdatePassword,
 } from "./pages/landing";
-import NavBar from "./components/NavBar";
+
 import {
   AkunUser,
   Checkout,
@@ -22,12 +22,13 @@ import {
   Users,
 } from "./pages/user";
 import { useEffect, useState } from "react";
-import { CreateProduct, Dashboard, EditProduct } from "./pages/admin";
+import { CreateProduct, EditProduct } from "./pages/admin";
 import Navigation from "./pages/admin/navigation/navigation.component";
 import OrderTable from "./pages/admin/order/order-table.component";
 import ProductTable from "./pages/admin/product/product-table.component";
 import { UserDsb } from "./pages/admin/User/user";
 import RegisterAdmin from "./pages/landing/RegisterAdmin";
+import { Header } from "./components";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -50,6 +51,7 @@ function App() {
   if (JSON.parse(sessionStorage.getItem("ROLE")) === "user" && isLogin) {
     return (
       <>
+        <Header />
         <Routes>
           <Route path="/user" element={<Users />}>
             <Route path="" element={<HomeUser />} />
@@ -90,18 +92,18 @@ function App() {
   return (
     <>
       {/* ROUTES LANDING PAGE */}
-      <NavBar />
+
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/menu" element={<Menu />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/stores" element={<Stores />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/signup" element={<SignUp />}>
-          {/* <Route path="admin" element={<RegisterAdmin />} /> */}
+        <Route path="/" element={<Home />}>
+          <Route path="" element={<Menu />} />
+          <Route path="about" element={<About />} />
         </Route>
-        <Route path="/forgot" element={<ForgotPassword />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<SignUp />} />
+        <Route path="/admin" element={<RegisterAdmin />} />
+        <Route path="/forgot" element={<ForgotPassword />} />
+        <Route path="/password/:id" element={<UpdatePassword />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

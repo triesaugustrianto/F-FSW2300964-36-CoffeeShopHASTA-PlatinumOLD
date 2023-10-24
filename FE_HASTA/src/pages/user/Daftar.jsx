@@ -18,8 +18,8 @@ export const Daftar = () => {
 
   return (
     <div className="min-vh-100">
-      <div className="container ">
-        <ul className="nav justify-content-center ">
+      <div className="container mt-2">
+        <ul className="nav justify-content-center">
           <li className="nav-item">
             <NavLink
               className={
@@ -87,7 +87,7 @@ export const Daftar = () => {
           </li>
         </ul>
       </div>
-      <hr className="border-3 border-success shadow" />
+
       <div className="container d-flex justify-content-between mt-4 flex-wrap gap-3">
         {data &&
           data.map((e) => {

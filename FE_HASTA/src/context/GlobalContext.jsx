@@ -1,6 +1,7 @@
 import React, { createContext, useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "../fetch";
+import { Errors, Loading } from "../components";
 
 export const QueryConsum = createContext();
 export const SearchConsum = createContext();
@@ -10,11 +11,12 @@ export const GlobalContext = ({ children }) => {
   const [query, setQuery] = useState("All");
   const [search, setSearch] = useState("");
   const { data, isLoading, error } = useSWR(
-    `http://app-citrapersada.net:2000/api/products`,
+    `http://localhost:2000/api/products`,
     fetcher
   );
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Internal server error</div>;
+
+  if (isLoading) return <Loading />;
+  if (error) return <Errors />;
 
   return (
     <QueryConsum.Provider value={[query, setQuery]}>

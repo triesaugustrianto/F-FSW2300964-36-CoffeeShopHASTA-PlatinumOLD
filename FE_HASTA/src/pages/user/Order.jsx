@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 //modul
 export const Order = () => {
+  const token = sessionStorage.getItem("token");
   const [data, setData] = useState([]);
   const [prices, setPrices] = useState(null);
   const navigate = useNavigate();
@@ -17,7 +18,14 @@ export const Order = () => {
   //send
   const Submit = (data) => {
     axios
-      .post(`http://localhost:2000/api/checkout`, data)
+      .post(`http://localhost:2000/api/checkout`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          "Acess-Control-Allow-Origin": "*",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         if (res.status === 201) {
           toast.success("Success checkout !", {
@@ -26,7 +34,7 @@ export const Order = () => {
           });
           setTimeout(() => {
             window.location.href = "/user/order/";
-            localStorage.setItem("nav", "3");
+            sessionStorage.setItem("nav", "3");
           }, 1800);
         }
       })
@@ -36,8 +44,6 @@ export const Order = () => {
             position: toast.POSITION.TOP_CENTER,
           });
         }
-
-        console.log(err);
       });
   };
   useEffect(() => {
