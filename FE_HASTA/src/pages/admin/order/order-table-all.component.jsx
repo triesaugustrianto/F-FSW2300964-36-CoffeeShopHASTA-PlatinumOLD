@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
+// import OrderNavbar from "./order-navbar.component";
 
-function OrderTable() {
+function AllOrder() {
   const [textColor, setTextColor] = useState("#a3a3a3");
   const [textCheck2, setTextCheck2] = useState("#a3a3a3");
 
@@ -36,11 +37,11 @@ function OrderTable() {
                 <th scope="col">Sugar</th>
                 <th scope="col">Cold/Hot</th>
                 <th scope="col">Topping</th>
+                <th scope="col">Action</th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
-              {/* {data.map((data) => ( */}
               <tr>
                 <td>1</td>
                 <td>John Doe</td>
@@ -49,6 +50,7 @@ function OrderTable() {
                 <td>Large</td>
                 <td>Less Sugar</td>
                 <td>Cold</td>
+                <td>Boba</td>
                 <td>Boba</td>
                 <td>
                   <button
@@ -89,7 +91,6 @@ function OrderTable() {
                   </button>
                 </td>
               </tr>
-              {/* ))} */}
             </tbody>
           </table>
         </div>
@@ -98,5 +99,4 @@ function OrderTable() {
   );
 }
 
-export default OrderTable;
-
+export default AllOrder;

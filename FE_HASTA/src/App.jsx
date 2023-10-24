@@ -21,34 +21,73 @@ import {
   PesananUser,
   Users,
 } from "./pages/user";
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
 import { CreateProduct, EditProduct } from "./pages/admin";
+=======
+import { useState } from "react";
+import { CreateProduct, Dashboard, EditProduct } from "./pages/admin";
+>>>>>>> dcc2c0cd9044c52ef2cdc4ae6870c392feb2e165
 import Navigation from "./pages/admin/navigation/navigation.component";
-import OrderTable from "./pages/admin/order/order-table.component";
 import ProductTable from "./pages/admin/product/product-table.component";
 import { UserDsb } from "./pages/admin/User/user";
+<<<<<<< HEAD
 import RegisterAdmin from "./pages/landing/RegisterAdmin";
 import { Header } from "./components";
+=======
+import OrderNavbar from "./pages/admin/order/order-navbar.component";
+import CheckedOrder from "./pages/admin/order/order-table-checked.component";
+import AllOrder from "./pages/admin/order/order-table-all.component";
+import OrderDone from "./pages/admin/order/order-table-done.component";
+>>>>>>> dcc2c0cd9044c52ef2cdc4ae6870c392feb2e165
 
 function App() {
-  const token = sessionStorage.getItem("token");
   const [isLogin, setIsLogin] = useState(true);
 
-  useEffect(() => {
-    const token = sessionStorage.getItem("token");
-    if (!token) {
-      setTimeout(() => {
-        setIsLogin(false);
-      }, 1000);
-    }
+  const [isAdmin, setIsAdmin] = useState(true);
+  if (isAdmin) {
+    return (
+      <>
+        {/* ROUTES LANDING DASHBOARD */}
 
-    setTimeout(() => {
-      setIsLogin(true);
-    }, 1000);
-  }, []);
+        <Routes>
+          <Route path="/dsb" element={<Navigation />}>
+            <Route path="product" element={<ProductTable />} />
+            <Route path="user" element={<UserDsb />} />
+            <Route path="order" element={<OrderNavbar />}>
+              <Route path="" element={<AllOrder />} />
+              <Route path="checked" element={<CheckedOrder />} />
+              <Route path="done" element={<OrderDone />} />
+            </Route>
+            <Route path="product/edit/:id" element={<EditProduct />} />
+            <Route path="product/create" element={<CreateProduct />} />
+            edit
+          </Route>
+        </Routes>
+      </>
+    );
+  }
 
-  //!! =============== ROUTE PATH USER ===================
-  if (JSON.parse(sessionStorage.getItem("ROLE")) === "user" && isLogin) {
+  if (!isLogin) {
+    return (
+      <>
+        {/* ROUTES LANDING PAGE */}
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/menu" element={<Menu />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/stores" element={<Stores />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/forgot" element={<ForgotPassword />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </>
+    );
+  }
+
+  if (isLogin) {
     return (
       <>
         <Header />
@@ -67,6 +106,7 @@ function App() {
       </>
     );
   }
+<<<<<<< HEAD
 
   //? =============== ROUTE PATH ADMIN ===================
   if (isLogin && token) {
@@ -107,6 +147,8 @@ function App() {
       </Routes>
     </>
   );
+=======
+>>>>>>> dcc2c0cd9044c52ef2cdc4ae6870c392feb2e165
 }
 
 export default App;
