@@ -4,7 +4,7 @@ const { request, response } = require("express");
 //create checkout
 const createCheckout = async (req = request, res = response) => {
   try {
-    const { name, ID, price, qty, size, sweet, available, img, toping } =
+    const { name, ID, price, qty, size, sweet, available, img, user_id, toping } =
       await req.body;
 
     //FIND DATA
@@ -26,8 +26,7 @@ const createCheckout = async (req = request, res = response) => {
           qty: parseInt(qty),
           size: size,
           sweet: sweet,
-          available: available,
-          toping: toping,
+          availble: available,
         })
         .returning([
           "product",
@@ -99,4 +98,35 @@ const deleteCheckout = async (req = request, res = response) => {
     });
   }
 };
-module.exports = { createCheckout, getAllcheckout, deleteCheckout };
+
+//get checkout user
+const getCheckoutUser = async (req = request, res = response) => {
+  try {
+    const { user_id } = await req.body;
+    const getData = await db("checkout")
+      .where("isPay", false)
+      .andWhere("owner", user_id);
+    const sumPrice = await db("checkout")
+      .where("isPay", false)
+      .andWhere("owner", user_id)
+      .sum("price");
+
+    res.status(200).json({
+      status: true,
+      message: "data success",
+      query: getData,
+      totalPrice: sumPrice,
+    });
+  } catch (error) {
+    res.status(500).json({
+      succes: false,
+      error: error.message,
+    });
+  }
+};
+module.exports = {
+  createCheckout,
+  getAllcheckout,
+  deleteCheckout,
+  getCheckoutUser,
+};

@@ -18,6 +18,6 @@ routeUser.get("/api/users", getAllUsers);
 routeUser.get("/api/user", checkToken, getDetailUser);
 routeUser.put("/api/users/update-password/:id", updatePassword);
 routeUser.put("/api/users/confirm/:id", confirmUsers);
-routeUser.put("/api/users/update/:id", updateProfil);
+routeUser.put("/api/users/update", checkToken, updateProfil);
 
 module.exports = routeUser;

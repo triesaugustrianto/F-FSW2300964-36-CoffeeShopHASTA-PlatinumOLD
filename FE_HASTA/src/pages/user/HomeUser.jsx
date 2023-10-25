@@ -7,22 +7,43 @@ export const HomeUser = () => {
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img
-              src="https://images.unsplash.com/photo-1485808191679-5f86510681a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
-              className="d-block w-100"
+              src="https://source.unsplash.com/random/900×700/?coffe"
+              className="d-block w-100 min-vh-100"
               alt="..."
             />
           </div>
           <div className="carousel-item">
             <img
-              src="https://images.unsplash.com/photo-1610632380989-680fe40816c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
-              className="d-block w-100"
+              src="https://source.unsplash.com/random/900×700/?tea"
+              className="d-block w-100 min-vh-100"
               alt="..."
             />
           </div>
           <div className="carousel-item">
             <img
-              src="https://images.unsplash.com/photo-1510972527921-ce03766a1cf1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MjF8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
-              className="d-block w-100"
+              src="https://source.unsplash.com/random/900×700/?juice"
+              className="d-block w-100 min-vh-100"
+              alt="..."
+            />
+          </div>
+          <div className="carousel-item">
+            <img
+              src="https://source.unsplash.com/random/900×700/?coffe"
+              className="d-block w-100 min-vh-100"
+              alt="..."
+            />
+          </div>
+          <div className="carousel-item">
+            <img
+              src="https://source.unsplash.com/random/900×700/?tea"
+              className="d-block w-100 min-vh-100"
+              alt="..."
+            />
+          </div>
+          <div className="carousel-item">
+            <img
+              src="https://source.unsplash.com/random/900×700/?juice"
+              className="d-block w-100 min-vh-100"
               alt="..."
             />
           </div>
@@ -33,8 +54,7 @@ export const HomeUser = () => {
           data-bs-target="#carouselExample"
           data-bs-slide="prev"
         >
-          <span className="carousel-control-prev-icon" aria-hidden="true" />
-          <span className="visually-hidden">Previous</span>
+          {/* <span className="carousel-control-prev-icon" aria-hidden="true" /> */}
         </button>
         <button
           className="carousel-control-next"
@@ -42,8 +62,7 @@ export const HomeUser = () => {
           data-bs-target="#carouselExample"
           data-bs-slide="next"
         >
-          <span className="carousel-control-next-icon" aria-hidden="true" />
-          <span className="visually-hidden">Next</span>
+          {/* <span className="carousel-control-next-icon" aria-hidden="true" /> */}
         </button>
       </div>
     </div>

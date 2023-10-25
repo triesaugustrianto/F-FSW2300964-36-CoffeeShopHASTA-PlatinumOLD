@@ -12,14 +12,14 @@ import {
 import { NavLink } from "react-router-dom";
 
 export const MenuUser = () => {
-  const storedValueAsNumber = Number(localStorage.getItem("nav"));
+  const storedValueAsNumber = Number(sessionStorage.getItem("nav"));
   const [active, setActive] = useState(
     Number.isInteger(storedValueAsNumber) ? storedValueAsNumber : 1
   );
 
   //active
   useEffect(() => {
-    localStorage.setItem("nav", String(active));
+    sessionStorage.setItem("nav", String(active));
   }, [active]);
   return (
     <div className="fixed-bottom w-100">

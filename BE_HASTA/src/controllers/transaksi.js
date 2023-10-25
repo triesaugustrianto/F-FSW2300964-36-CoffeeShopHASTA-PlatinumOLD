@@ -5,7 +5,7 @@ const moment = require("moment/moment");
 //create
 const createTransaksi = async (req = request, res = response) => {
   try {
-    const { transaksi, totals, uang } = await req.body;
+    const { transaksi, totals, uang, user_id } = await req.body;
 
     const Transactiions = await db.transaction((trx) => {
       return trx("transaction")
@@ -13,6 +13,7 @@ const createTransaksi = async (req = request, res = response) => {
           totals: parseInt(totals),
           uang: parseInt(uang),
           kembalian: parseInt(uang) - parseInt(totals),
+          owner: user_id,
         })
         .returning("id")
         .then((id) => {
@@ -25,6 +26,9 @@ const createTransaksi = async (req = request, res = response) => {
             .returning(["name", "qty", "keterangan"]);
         });
     });
+    const update = await db("checkout")
+      .where("owner", user_id)
+      .update("isPay", true);
 
     res.status(201).json({
       status: true,
@@ -182,6 +186,47 @@ const getDetailTransaksi = async (req = request, res = response) => {
     });
   }
 };
+
+//get order by user
+const getOrderUser = async (req = request, res = response) => {
+  try {
+    const { user_id } = await req.body;
+    const { day } = await req.query;
+    const start = moment(day).startOf("months");
+    const end = moment(day).endOf("months");
+    const Transactiions = await db.transaction((trx) => {
+      return trx("transaction")
+        .select("*")
+        .orderBy("createdAt", "desc")
+        .where("owner", user_id)
+        .andWhere("createdAt", ">", new Date(start))
+        .andWhere("createdAt", "<", new Date(end))
+        .then((data) => {
+          if (data.length) {
+            return trx("items")
+              .where("id_transaksi", data[0].id)
+              .then((result) => {
+                const struk = data.map((item) => ({
+                  ...item,
+                  transaksi: result,
+                }));
+                return struk;
+              });
+          }
+        });
+    });
+    res.status(200).json({
+      status: true,
+      message: "data succsess",
+      query: Transactiions,
+    });
+  } catch (error) {
+    res.status(500).json({
+      succes: false,
+      error: error.message,
+    });
+  }
+};
 module.exports = {
   createTransaksi,
   getTransaksiAll,
@@ -189,4 +234,5 @@ module.exports = {
   doneTransaksi,
   getDailyTransaksi,
   getDetailTransaksi,
+  getOrderUser,
 };

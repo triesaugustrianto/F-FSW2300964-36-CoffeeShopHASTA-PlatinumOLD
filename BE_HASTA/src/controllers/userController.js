@@ -133,9 +133,9 @@ const resetPassword = async (req = request, res = response) => {
         to: email,
         subject: "Reset Password",
         html: `
-        <p>Link reset password : <a href="http://ess.citrapersada.net/ess/update-password/${
+        <p>Link reset password : <a href="http://localhost:5173/password/${
           findUsers.id
-        }" target=_blank>http://ess.citrapersada.net/ess/forgot</a></p>
+        }" target=_blank>http://localhost:5173</a></p>
         </br>
         </hr>
         ©${new Date().getFullYear()}IT_Citra-Persada-Infrastruktur
@@ -179,7 +179,7 @@ const updatePassword = async (req = request, res = response) => {
 const getDetailUser = async (req = request, res = response) => {
   try {
     const { user_id } = await req.body;
-    const getData = await db("users").select("*").where("id", user_id).first();
+    const getData = await db("users").select("*").where("id", user_id);
     res.status(200).json({
       status: true,
       message: "data is displayed successfully",
@@ -214,16 +214,18 @@ const getAllUsers = async (req = request, res = response) => {
 //update profil
 const updateProfil = async (req = request, res = response) => {
   try {
-    const { id } = await req.params;
-    const { name, phone, email, address, password } = await req.body;
+    // const { id } = await req.params;
+    const { name, phone, email, address, password, user_id } = await req.body;
+
     //hash password
     const hashPassword = await argon2.hash(password);
     //find user
-    const findUser = await db("users").select("*").where("id", id).first();
-    //updatedata
+    const findUser = await db("users").select("*").where("id", user_id).first();
+
+    // updatedata
     const updateData = await db("users")
       .select("*")
-      .where("id", id)
+      .where("id", user_id)
       .update({
         name: name,
         phone: phone,

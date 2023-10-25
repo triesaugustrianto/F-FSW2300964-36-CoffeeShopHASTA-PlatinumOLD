@@ -4,7 +4,7 @@ import { NavLink, Outlet } from "react-router-dom";
 export const PesananUser = () => {
   return (
     <div className="container">
-      <ul className="nav nav-underline justify-content-around mt-3">
+      <ul className="nav nav-underline justify-content-around mt-2">
         <li className="nav-item">
           <NavLink
             className="nav-link "
@@ -24,7 +24,7 @@ export const PesananUser = () => {
           </NavLink>
         </li>
       </ul>
-      <hr className="border-3 text-success" />
+
       <Outlet />
     </div>
   );

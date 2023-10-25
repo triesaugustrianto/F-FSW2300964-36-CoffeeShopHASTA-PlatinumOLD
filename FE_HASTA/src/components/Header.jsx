@@ -1,8 +1,11 @@
+import { logo } from "../assets";
+
 const Header = () => {
   return (
-    <div className="header">
-      <h1>Our Menu</h1>
-      <span>Discover the timeless taste</span>
+    <div className="container-fluid border-bottom ">
+      <div className="">
+        <img src={logo} alt="logo" style={{ width: "180px" }} />
+      </div>
     </div>
   );
 };

@@ -8,11 +8,8 @@ export default function Menu() {
   const [product] = useContext(ProductConsum);
 
   return (
-    <>
+    <div>
       <div className="App">
-        <div className="navbar">
-          <Header />
-        </div>
         <div className="menu-content">
           <div className="sidebar">
             <SideBar />
@@ -89,6 +86,6 @@ export default function Menu() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

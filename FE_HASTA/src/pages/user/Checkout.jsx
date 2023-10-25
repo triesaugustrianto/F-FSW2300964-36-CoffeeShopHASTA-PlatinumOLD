@@ -6,9 +6,10 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { ExclamationCircle } from "react-bootstrap-icons";
 import { ToastContainer, toast } from "react-toastify";
 export const Checkout = () => {
+  const token = sessionStorage.getItem("token");
   const handlePesan = () => {
     window.location.href = "/user/menu";
-    localStorage.setItem("nav", "2");
+    sessionStorage.setItem("nav", "2");
   };
   const handleDelete = (id) => {
     axios
@@ -25,7 +26,14 @@ export const Checkout = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:2000/api/checkout`)
+      .get(`http://localhost:2000/api/checkout-user`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Acess-Control-Allow-Origin": "*",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         const response = res.data;
         setData(response.query);
@@ -50,7 +58,14 @@ export const Checkout = () => {
   //submit pesanan
   const Submits = (data) => {
     axios
-      .post(`http://localhost:2000/api/transaksi`, data)
+      .post(`http://localhost:2000/api/transaksi`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          "Acess-Control-Allow-Origin": "*",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         if (res.status === 201) {
           toast.success("Payment Success !", {
@@ -75,7 +90,7 @@ export const Checkout = () => {
   //change input tunai
   const handleChange = (e) => {
     const value = e.target.value;
-    console.log(value);
+
     if (value < parseInt(totals)) {
       setError("uang", { type: "required" }, { shouldFocus: true });
     }
@@ -100,7 +115,7 @@ export const Checkout = () => {
                         <div className=" d-flex">
                           <div className="col">
                             <img
-                              src={e.Img}
+                              src={e.image}
                               className="img-fluid  rounded-3 object-fit-cover"
                               alt="image"
                               style={{
