@@ -16,12 +16,8 @@
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
-<<<<<<< HEAD
     "@hookform/resolvers": "^3.3.2",
     "antd": "^5.10.1",
-=======
-    "antd": "^5.10.2",
->>>>>>> dcc2c0cd9044c52ef2cdc4ae6870c392feb2e165
     "axios": "^1.5.1",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.1",
