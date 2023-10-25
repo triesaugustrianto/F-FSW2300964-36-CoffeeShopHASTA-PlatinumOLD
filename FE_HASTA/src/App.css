@@ -60,8 +60,11 @@ nav {
   /* width: 100vh; */
 }
 nav .logo {
+  display: flex;
+  gap: 5px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
+  font-family: "Montserrat";
   color: black;
   text-decoration: none;
   position: absolute;
@@ -379,4 +382,35 @@ nav .login button:active {
 /* Navbar Order-Admin Panel */
 .custom-navbar {
   width: 100%;
+}
+
+/* About */
+.about-page span {
+  font-family: "Montserrat";
+  font-weight: 600;
+}
+
+.about-page h1 {
+  font-family: "Montserrat";
+  font-weight: 700;
+}
+
+.about-page h2 {
+  font-family: "Montserrat";
+  font-weight: 600;
+}
+.home-page h1 {
+  font-family: "Montserrat";
+  font-weight: 700;
+  margin-top: 120px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.home-page span {
+  font-family: "Montserrat";
+  font-weight: 600;
+}
+.home-page h2 {
+  font-family: "Montserrat";
+  font-weight: 600;
 }

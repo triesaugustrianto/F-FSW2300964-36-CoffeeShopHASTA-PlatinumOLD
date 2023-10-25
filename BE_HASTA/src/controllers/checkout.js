@@ -4,7 +4,7 @@ const { request, response } = require("express");
 //create checkout
 const createCheckout = async (req = request, res = response) => {
   try {
-    const { name, ID, price, qty, size, sweet, available, img } =
+    const { name, ID, price, qty, size, sweet, available, img, toping } =
       await req.body;
 
     //FIND DATA
@@ -12,8 +12,9 @@ const createCheckout = async (req = request, res = response) => {
       .where("id_product", ID)
       .andWhere("isPay", false)
       .andWhere("size", size)
-      .andWhere("availble", available)
+      .andWhere("available", available)
       .andWhere("sweet", sweet)
+      .andWhere("toping", toping)
       .first();
 
     if (findCheckout === undefined) {
@@ -25,9 +26,18 @@ const createCheckout = async (req = request, res = response) => {
           qty: parseInt(qty),
           size: size,
           sweet: sweet,
-          availble: available,
+          available: available,
+          toping: toping,
         })
-        .returning(["product", "price", "qty", "size", "sweet", "availble"]);
+        .returning([
+          "product",
+          "price",
+          "qty",
+          "size",
+          "sweet",
+          "available",
+          "toping",
+        ]);
       res.status(201).json({
         status: true,
         message: "success checkout",
@@ -40,7 +50,7 @@ const createCheckout = async (req = request, res = response) => {
           qty: findCheckout.qty + parseInt(qty),
           price: parseInt(findCheckout.price) + parseInt(price),
         })
-        .returning(["product", "price", "qty", "size", "sweet", "availble"]);
+        .returning(["product", "price", "qty", "size", "sweet", "available"]);
       res.status(201).json({
         status: true,
         message: "success checkout",

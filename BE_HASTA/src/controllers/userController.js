@@ -267,7 +267,7 @@ const loginUser = async (req = request, res = response) => {
     if (!aktif) {
       return res.status(403).json({
         succes: false,
-        message: "user nof confirm",
+        message: "user not confirm",
       });
     }
     //check password

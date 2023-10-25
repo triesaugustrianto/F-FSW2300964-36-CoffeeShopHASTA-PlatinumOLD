@@ -11,9 +11,9 @@ exports.up = function (knex) {
     table.integer("qty").notNullable();
     table.string("size").notNullable();
     table.string("sweet").notNullable();
-    table.string("availble").notNullable();
+    table.string("available").notNullable();
     table.text("image");
-    table.string("toping");
+    table.string("toping")
     table.string("owner");
     table.boolean("isPay").defaultTo(false);
     table.timestamp("createdAt").defaultTo(knex.fn.now());

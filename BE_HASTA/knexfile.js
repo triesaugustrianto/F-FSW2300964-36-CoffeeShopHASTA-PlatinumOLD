@@ -27,9 +27,9 @@ module.exports = {
   development: {
     client: "postgresql",
     connection: {
-      database: "db_coffe",
+      database: "learning",
       user: "postgres",
-      password: "123456",
+      password: "admin",
     },
     pool: {
       min: 2,
